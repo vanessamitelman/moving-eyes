@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        background-color: #000;
+        color: #fff;
+        padding: 0;
+        margin: 0;
+      }
+      main {
+        display: grid;
+        place-items: center;
+        width: 298px;
+        height: 291px;
+        position: relative;
+        margin: 0 auto;
+      }
+      #eyes,
+      #eyes img {
+        position: absolute;
+        width: 70px;
+      }
+      #eyes {
+        top: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <img id="anchor" src="owl.png" alt="owl" />
+      <div id="eyes">
+        <img
+          class="eye"
+          src="eye.png"
+          alt="eye"
+          style="top: 50px; right: 43px"
+        />
+        <img
+          class="eye"
+          src="eye.png"
+          alt="eye"
+          style="top: 50px; left: 43px"
+        />
+      </div>
+    </main>
+    <script>
+      document.addEventListener('mousemove', (e) => {
+        const mouseX = e.clientX;
+        const mouseY = e.clientY;
+        const anchor = document.getElementById('anchor');
+        const rekt = anchor.getBoundingClientRect();
+        const anchorX = rekt.left + rekt.width / 2;
+        const anchorY = rekt.top + rekt.height / 2;
+        const angleDeg = 180 - angle(mouseX, mouseY, anchorX, anchorY);
+        const eyes = document.querySelectorAll('.eye');
+        eyes.forEach((eye) => {
+          eye.style.transform = `rotate(${angleDeg}deg)`;
+        });
+      });
+
+      function angle(cx, cy, ex, ey) {
+        const dy = ey - cy;
+        const dx = ex - cx;
+        const rad = Math.atan2(dy, dx);
+        const deg = (rad * 180) / Math.PI;
+        return deg;
+      }
+    </script>
+  </body>
+</html>
