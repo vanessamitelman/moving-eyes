@@ -1,21 +1,13 @@
 document.addEventListener('mousemove', (e) => {
-  const mouseX = e.clientX;
-  const mouseY = e.clientY;
-  const anchor = document.getElementById('anchor');
-  const rekt = anchor.getBoundingClientRect();
-  const anchorX = rekt.left + rekt.width / 2;
-  const anchorY = rekt.top + rekt.height / 2;
-  const angleDeg = 180 - angle(mouseX, mouseY, anchorX, anchorY);
   const eyes = document.querySelectorAll('.eye');
-  eyes.forEach((eye) => {
-    eye.style.transform = `rotate(${angleDeg}deg)`;
+  [].forEach.call(eyes, function (eye) {
+    let mouseX = eye.getBoundingClientRect().right;
+    if (eye.classList.contains('eye-left')) {
+      mouseX = eye.getBoundingClientRect().left;
+    }
+    let mouseY = eye.getBoundingClientRect().top;
+    let radianDegrees = Math.atan2(e.pageX - mouseX, e.pageY - mouseY);
+    let rotationDegrees = radianDegrees * (180 / Math.PI) * -1 + 180;
+    eye.style.transform = `rotate(${rotationDegrees}deg)`;
   });
 });
-
-function angle(cx, cy, ex, ey) {
-  const dy = ey - cy;
-  const dx = ex - cx;
-  const rad = Math.atan2(dy, dx);
-  const deg = (rad * 180) / Math.PI;
-  return deg;
-}
