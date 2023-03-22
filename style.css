@@ -1,0 +1,22 @@
+body {
+  background-color: #000;
+  color: #fff;
+  padding: 0;
+  margin: 0;
+}
+main {
+  display: grid;
+  place-items: center;
+  width: 298px;
+  height: 291px;
+  position: relative;
+  margin: 0 auto;
+}
+#eyes,
+#eyes img {
+  position: absolute;
+  width: 70px;
+}
+#eyes {
+  top: 0;
+}
